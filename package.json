@@ -1,0 +1,11 @@
+{
+  "name": "grunt",
+  "description": "LightCycles grunt",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "grunt": "x",
+    "grunt-contrib-uglify": "x",
+    "grunt-contrib-copy": "x"
+  }
+}
