@@ -111,25 +111,43 @@ This is an experiment in HTML5's Canvas and Javascript.
 
     if (lc.players === 1) {
       //if single player game, we'll update player 2 here.
+      //The computer logic is simple, in that it aways turns the same way, unless
+      //that way is blocked. I should add some randomness here!
       switch (lc.player2.dir) {
       case 0:
         if (lc.gameGrid[((lc.player2.xPos - 1) * 320) + lc.player2.yPos] !== 0) {
-          lc.player2.dir = 2;
+          if (lc.gameGrid[(lc.player2.xPos * 320) + (lc.player2.yPos - 1)] === 0) {
+            lc.player2.dir = 2;
+          } else {
+            lc.player2.dir = 3;
+          }
         }
         break;
       case 1:
         if (lc.gameGrid[((lc.player2.xPos + 1) * 320) + lc.player2.yPos] !== 0) {
-          lc.player2.dir = 2;
+          if (lc.gameGrid[(lc.player2.xPos * 320) + (lc.player2.yPos + 1)] === 0) {
+            lc.player2.dir = 3;
+          } else {
+            lc.player2.dir = 2;
+          }
         }
         break;
       case 2:
         if (lc.gameGrid[(lc.player2.xPos * 320) + (lc.player2.yPos - 1)] !== 0) {
-          lc.player2.dir = 0;
+          if (lc.gameGrid[((lc.player2.xPos - 1) * 320) + lc.player2.yPos] !== 0) {
+            lc.player2.dir = 1;
+          } else {
+            lc.player2.dir = 0;
+          }
         }
         break;
       case 3:
         if (lc.gameGrid[(lc.player2.xPos * 320) + (lc.player2.yPos + 1)] !== 0) {
-          lc.player2.dir = 0;
+          if (lc.gameGrid[((lc.player2.xPos + 1) * 320) + lc.player2.yPos] !== 0) {
+            lc.player2.dir = 0;
+          } else {
+            lc.player2.dir = 1;
+          }
         }
         break;
       }
