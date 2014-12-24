@@ -27,7 +27,7 @@ This is an experiment in HTML5's Canvas and Javascript.
     //Set player start position and directions.
     lc.player1 = {
       xPos: 289,
-      yPos: 110,
+      yPos: 100,
       dir: 0,
       crashed: false
     };
