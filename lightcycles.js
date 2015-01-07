@@ -99,7 +99,6 @@ This is an experiment in HTML5's Canvas and Javascript.
           }
 
           //Draw a pre-defined wall
-          //context.fillStyle = '#'+Math.floor(Math.random()*16777215).toString(16);
           context.fillRect((ix * lc.pixelSize) + xOffset, (iy * lc.pixelSize) + yOffset, lc.pixelSize, lc.pixelSize);
           lc.gameDrawn[ix * 320 + iy] = block;
         } //end draw pixel grid
@@ -108,57 +107,92 @@ This is an experiment in HTML5's Canvas and Javascript.
   }
 
   function updatePlayerPositions() {
-
+    var choice;
     if (lc.players === 1) {
+      choice = Math.floor(Math.random() * 2); //Random turn direction if computer is 1 pixel from crashing.
       //if single player game, we'll update player 2 here.
-      //The computer logic is simple, in that it aways turns the same way, unless
-      //that way is blocked. I should add some randomness here!
       switch (lc.player2.dir) {
-      case 0:
+      case 0: //Left
         if (lc.gameGrid[((lc.player2.xPos - 1) * 320) + lc.player2.yPos] !== 0) {
-          if (lc.gameGrid[(lc.player2.xPos * 320) + (lc.player2.yPos - 1)] === 0) {
-            lc.player2.dir = 2;
+          if (choice === 0) {
+            if (lc.gameGrid[(lc.player2.xPos * 320) + (lc.player2.yPos - 1)] === 0) {
+              lc.player2.dir = 2;
+            } else {
+              lc.player2.dir = 3;
+            }
           } else {
-            lc.player2.dir = 3;
+            if (lc.gameGrid[(lc.player2.xPos * 320) + (lc.player2.yPos + 1)] === 0) {
+              lc.player2.dir = 3;
+            } else {
+              lc.player2.dir = 2;
+            }
           }
         }
         break;
-      case 1:
+
+      case 1: //Right
         if (lc.gameGrid[((lc.player2.xPos + 1) * 320) + lc.player2.yPos] !== 0) {
-          if (lc.gameGrid[(lc.player2.xPos * 320) + (lc.player2.yPos + 1)] === 0) {
-            lc.player2.dir = 3;
+          if (choice === 0) {
+            if (lc.gameGrid[(lc.player2.xPos * 320) + (lc.player2.yPos + 1)] === 0) {
+              lc.player2.dir = 3;
+            } else {
+              lc.player2.dir = 2;
+            }
           } else {
-            lc.player2.dir = 2;
+            if (lc.gameGrid[(lc.player2.xPos * 320) + (lc.player2.yPos - 1)] === 0) {
+              lc.player2.dir = 2;
+            } else {
+              lc.player2.dir = 3;
+            }
           }
         }
         break;
-      case 2:
+
+      case 2: //Up
         if (lc.gameGrid[(lc.player2.xPos * 320) + (lc.player2.yPos - 1)] !== 0) {
-          if (lc.gameGrid[((lc.player2.xPos - 1) * 320) + lc.player2.yPos] !== 0) {
-            lc.player2.dir = 1;
+          if (choice === 0) {
+            if (lc.gameGrid[((lc.player2.xPos - 1) * 320) + lc.player2.yPos] !== 0) {
+              lc.player2.dir = 1;
+            } else {
+              lc.player2.dir = 0;
+            }
           } else {
-            lc.player2.dir = 0;
+            if (lc.gameGrid[((lc.player2.xPos + 1) * 320) + lc.player2.yPos] !== 0) {
+              lc.player2.dir = 0;
+            } else {
+              lc.player2.dir = 1;
+            }
           }
         }
         break;
-      case 3:
+
+      case 3: //Down
         if (lc.gameGrid[(lc.player2.xPos * 320) + (lc.player2.yPos + 1)] !== 0) {
-          if (lc.gameGrid[((lc.player2.xPos + 1) * 320) + lc.player2.yPos] !== 0) {
-            lc.player2.dir = 0;
+          if (choice === 0) {
+            if (lc.gameGrid[((lc.player2.xPos + 1) * 320) + lc.player2.yPos] !== 0) {
+              lc.player2.dir = 0;
+            } else {
+              lc.player2.dir = 1;
+            }
           } else {
-            lc.player2.dir = 1;
+            if (lc.gameGrid[((lc.player2.xPos - 1) * 320) + lc.player2.yPos] !== 0) {
+              lc.player2.dir = 1;
+            } else {
+              lc.player2.dir = 0;
+            }
           }
         }
         break;
+
       }
-    }
+    } //end computer controlled player.
 
     //Player 1
     switch (lc.player1.dir) {
     case 0: //left
       lc.player1.xPos -= 1;
       break;
-    case 1: //left
+    case 1: //right
       lc.player1.xPos += 1;
       break;
     case 2: //up
@@ -179,7 +213,7 @@ This is an experiment in HTML5's Canvas and Javascript.
     case 0: //left
       lc.player2.xPos -= 1;
       break;
-    case 1: //left
+    case 1: //right
       lc.player2.xPos += 1;
       break;
     case 2: //up
