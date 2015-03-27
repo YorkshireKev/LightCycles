@@ -261,7 +261,7 @@ This is an experiment in HTML5's Canvas and Javascript.
     context.fillStyle = '#d4c406';
     context.fillText("Press 1 for 1 player (Computer Plays Green), or 2 for 2 players", canvas.width / 2, (canvas.height / 2) + (lc.pixelSize * 40));
     context.fillStyle = '#7ee8f5';
-    context.fillText("Green Player: Q, A, Z and X. Red Player: O, P, N and M", canvas.width / 2, (canvas.height / 2) + (lc.pixelSize * 70));
+    context.fillText("Green Player: Q, A, Z and X. Red Player: P, L, N and M", canvas.width / 2, (canvas.height / 2) + (lc.pixelSize * 70));
   }
 
   window.addEventListener("keydown", function (event) {
